@@ -1,0 +1,17 @@
+download https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings
+https://github.com/braver/PhpStorm-Solarized
+https://medium.com/@ardanirohman/laravel-%EF%B8%8F-visual-studio-code-debug-environment-65440274d3b0
+
+open close explorer = Alt + 1;
+reformat code = ctrl+alt+L
+
+{
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "terminal.integrated.fontSize": 18,
+    "editor.fontSize": 12,
+    "workbench.colorTheme": "Solarized Light",
+    "editor.renderIndentGuides": false,
+    "window.zoomLevel": 1,
+    "workbench.iconTheme": "vscode-icons",
+    "blade.format.enable": true
+}
