@@ -8,4 +8,8 @@ class Post extends Model
 {
     //Posts Model protected submitted array forms -> avoid getting mass assignment error
     protected $guarded = [];
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

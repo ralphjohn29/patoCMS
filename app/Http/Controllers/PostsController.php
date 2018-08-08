@@ -9,15 +9,18 @@ use App\Post;
 class PostsController extends Controller
 {
     public function index(){
-        return view ('posts.index');
-    }
-    public function show(){
-        
-        return view ('posts.show', compact('post'));
+        $posts = Post::latest()->get();
+        return view ('posts.index', compact('posts'));
     }
     public function create(){
         return view('posts.create');
     }
+
+    public function show(Post $post){ //fetch Post to var $post on Route /posts/{post} must be same var and wildcard
+
+        return view ('posts.show', compact('post'));
+    }
+
 
     public function store(){
         // Create a new post using the request data when using store function
@@ -29,7 +32,7 @@ class PostsController extends Controller
 
         $this->validate(request(), [
             'title' => 'required',
-            'body' => 'requred'
+            'body' => 'required'
         ]);
         // allow save and add forms submitted to database with this one line of code
          //but must use protected $guarded or $fillable to Post Model
