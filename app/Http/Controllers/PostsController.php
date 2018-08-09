@@ -8,6 +8,11 @@ use App\Post;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index(){
         $posts = Post::latest()->get();
         return view ('posts.index', compact('posts'));
@@ -36,7 +41,16 @@ class PostsController extends Controller
         ]);
         // allow save and add forms submitted to database with this one line of code
          //but must use protected $guarded or $fillable to Post Model
-        Post::create(request()->all());
+
+        auth()->user()->publish(
+            new Post(\request(['title','body']))
+        );
+
+//        Post::create([
+//            'title' =>\request('title'),
+//            'body' =>\request('body'),
+//            'user_id' => auth()->id()
+//        ]);
         //save it to the database
         //$post->save();
 

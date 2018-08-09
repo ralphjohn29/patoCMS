@@ -1,6 +1,6 @@
 <div class="blog-post">
     <h2 class="blog-post-title"><a href="/posts/{{$post->id}}">{{ $post->title }}</a></h2>
-    <p class="blog-post-meta"> Created at {{$post->created_at->toFormattedDateString() }} By <a href="#">Rj</a></p>
+    <p class="blog-post-meta"> Created at {{$post->created_at->toFormattedDateString() }} By <a href="#">{{$post->user->name}}</a></p>
 
     <p>{{$post->body}}</p>
     <ul>

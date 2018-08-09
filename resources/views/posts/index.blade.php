@@ -1,4 +1,5 @@
 @extends ('layouts.master')
+
 @section('content')
 
     @foreach($posts as $post) <!-- get all collection posts from controller to call the data -->

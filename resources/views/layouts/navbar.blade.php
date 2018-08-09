@@ -6,6 +6,11 @@
       <a class="nav-link" href="#">Press</a>
       <a class="nav-link" href="#">New hires</a>
       <a class="nav-link" href="#">About</a>
+
+      @if(Auth::check())
+      <a href="#" class="nav-link ml-auto">{{Auth::user()->name}}</a>
+      @endif
     </nav>
+
   </div>
 </div>

@@ -17,7 +17,7 @@ Route::get('/', function(){
     return view('welcome');
 });
 
-Route::get('/' , 'PostsController@index');
+Route::get('/' , 'PostsController@index')->name('home');
 Route::get('/posts/create', 'PostsController@create');
 Route::get('/posts/{post}' , 'PostsController@show');
 
@@ -51,4 +51,10 @@ Route::get('/tasks/{tasks}', 'TasksController@show');
 // });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register', 'RegistrationController@create');
+Route::post('/register', 'RegistrationController@store');
+
+Route::get('/login', 'SessionsController@create');
+Route::post('/login', 'SessionsController@store');
+
+Route::get('/logout', 'SessionsController@destroy');
