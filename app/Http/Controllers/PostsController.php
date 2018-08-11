@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-
+use App\User;
 
 class PostsController extends Controller
 {
@@ -13,21 +13,35 @@ class PostsController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(){
-        $posts = Post::latest()->get();
-        return view ('posts.index', compact('posts'));
+    public function index()
+    {
+        $posts = Post::latest()
+        ->filter(request(['month', 'year']))
+        ->get();
+
+//        $achieves = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
+//            ->groupBy('year', 'month')
+//            ->orderByRaw('min(created_at) desc')
+//            ->get()
+//            ->toArray();
+
+        return view('posts.index', compact('posts'));
     }
-    public function create(){
+
+    public function create()
+    {
         return view('posts.create');
     }
 
-    public function show(Post $post){ //fetch Post to var $post on Route /posts/{post} must be same var and wildcard
+    public function show(Post $post)
+    { //fetch Post to var $post on Route /posts/{post} must be same var and wildcard
 
-        return view ('posts.show', compact('post'));
+        return view('posts.show', compact('post'));
     }
 
 
-    public function store(){
+    public function store()
+    {
         // Create a new post using the request data when using store function
         //dd(request()->all());
         //$post = new Post;
@@ -40,10 +54,10 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
         // allow save and add forms submitted to database with this one line of code
-         //but must use protected $guarded or $fillable to Post Model
+        //but must use protected $guarded or $fillable to Post Model
 
         auth()->user()->publish(
-            new Post(\request(['title','body']))
+            new Post(\request(['title', 'body']))
         );
 
 //        Post::create([
@@ -56,6 +70,13 @@ class PostsController extends Controller
 
         //And redirect back to the home page.
         return redirect('/');
-        
+    }
+
+    public function users(){
+
+
+        $user_id = \request('user_id');
+        return dd($user_id);
+        return view('posts.user');
     }
 }

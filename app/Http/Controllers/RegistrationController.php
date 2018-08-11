@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 
 class RegistrationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function create(){
         return view('registration.create');
     }
